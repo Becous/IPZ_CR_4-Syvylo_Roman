@@ -50,8 +50,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.material3:material3:1.2.0")
-    implementation("androidx.compose.material3:material3-icon:1.2.0")
+    implementation ("androidx.compose.material:material-icons-core:{compose_version}")
+    implementation ("androidx.compose.material:material-icons-extended:{compose_version}")
+    implementation ("androidx.compose.ui:ui-util:1.5.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

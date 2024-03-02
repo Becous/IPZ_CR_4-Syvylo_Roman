@@ -10,17 +10,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberScaffoldState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import ua.edu.lntu.cw4.ui.theme.IPZ_CR4Theme
 
 class MainActivity : ComponentActivity() {
@@ -28,8 +29,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             IPZ_CR4Theme {
-
-                // A surface container using the 'background' color from the theme
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "screen1"
+                ){
+                    composable("screen1"){
+                        Screen1(navController = navController)
+                    }
+                    composable("screen2/{itemNumber}")
+                }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -63,7 +72,7 @@ fun GreetingPreview() {
 
 
 @Composable
-fun Screen2(modifier: Modifier = Modifier){
+fun Screen2(itemNumber: Int){
     val scaffoldState = rememberScrollState()
     Scaffold(
         topBar = {
@@ -85,7 +94,8 @@ fun Screen2(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun Screen1(){
-
+fun Screen1(navcontroller: NavController){
+    var selectedItem by remember { mutableStateOf(0) }
+    val scaffoldState = rememberScaffoldState()
 }
 
